@@ -63906,23 +63906,22 @@ A.ov.prototype={
 M(a,b){var s=null
 return A.ai6(A.afZ(A.eN("Collections",s,s,s,s,s,s)),A.agN(new A.Rx(),s,s,s,t.Gu))}}
 A.Rx.prototype={
-$1(a){var s,r,q,p,o,n,m,l=null,k=t.p,j=A.b([new A.CT(l),new A.Dl(l)],k)
+$1(a){var s,r,q,p,o,n,m=null,l=t.p,k=A.b([new A.CT(m),new A.Dl(m)],l)
 $.bG()
 s=$.bv
 if(s==null)s=$.bv=B.W
-s=J.ah(s.fw(0,l,t.Gu).CW)
+s=J.ah(s.fw(0,m,t.Gu).CW)
 for(;s.u();){r=s.gF(s)
 q=J.ag(r)
-p=A.eN(q.h(r,"name"),l,l,l,l,l,l)
-o=A.b([A.eN("Field Information",l,l,l,l,l,l)],k)
+p=A.eN(q.h(r,"name"),m,m,m,m,m,m)
+o=A.b([A.eN("Field Information",m,m,m,m,m,m)],l)
 for(q=J.ah(q.h(r,"fields"));q.u();){n=q.gF(q)
-m=A.eN("Name",l,l,l,l,l,l)
-o.push(A.ahe(l,l,l,l,A.eN(A.e(J.aK(n,"name")),l,l,l,l,l,l),m))}o.push(A.eN("@TODO Show list of document in new screen",l,l,l,l,l,l))
-o.push(A.eN("@TODO Add a document",l,l,l,l,l,l))
-o.push(A.eN("@TODO Update a document",l,l,l,l,l,l))
-o.push(A.eN("@TODO Delete a document",l,l,l,l,l,l))
-j.push(new A.uG(p,o,l))}k=A.kk(l,A.CP(j,B.cG,B.cY,B.cZ),l,l,l,l,new A.b1(16,16,16,16),l)
-return new A.q6(!0,k,l)},
+o.push(A.ahe(m,A.eN("Name",m,m,m,m,m,m),m,m,A.eN(A.e(J.aK(n,"name")),m,m,m,m,m,m),m))}o.push(A.eN("@TODO Show list of document in new screen",m,m,m,m,m,m))
+o.push(A.eN("@TODO Add a document",m,m,m,m,m,m))
+o.push(A.eN("@TODO Update a document",m,m,m,m,m,m))
+o.push(A.eN("@TODO Delete a document",m,m,m,m,m,m))
+k.push(new A.uG(p,o,m))}l=A.kk(m,A.CP(k,B.cG,B.cY,B.cZ),m,m,m,m,new A.b1(16,16,16,16),m)
+return new A.q6(!0,l,m)},
 $S:407}
 A.m5.prototype={
 ap(){return new A.Ki(B.m)}}
