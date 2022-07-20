@@ -32,7 +32,8 @@ class CollectionScreen extends StatelessWidget {
                   children: [
                     Spacer(),
                     ElevatedButton(
-                      onPressed: () => Get.toNamed(CollectionEditScreen.routeName),
+                      onPressed: () =>
+                          Get.toNamed(CollectionEditScreen.routeName),
                       child: Text('Create Collection'),
                     ),
                   ],
@@ -47,7 +48,9 @@ class CollectionScreen extends StatelessWidget {
                       for (final field in col['fields'])
                         ListTile(
                           title: Text("${field['name']}"),
-                          subtitle: Text("${field['type']}, optional: ${field['optiona'] ?? ''}"),
+                          subtitle: Text(
+                            subtitleFieldOptions(field),
+                          ),
                         ),
                       Text('@TODO Show list of document in new screen'),
                       Text('@TODO Add a document'),
@@ -61,5 +64,9 @@ class CollectionScreen extends StatelessWidget {
         );
       }),
     );
+  }
+
+  String subtitleFieldOptions(dynamic field) {
+    return "index: ${field['index']}, type: ${field['type']}, optional: ${field['optional']}, sort: ${field['sort']}, facet: ${field['facet']}, infix: ${field['infix']}, locale: ${field['locale'] ?? ''}";
   }
 }

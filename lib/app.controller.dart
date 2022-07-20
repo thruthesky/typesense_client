@@ -35,6 +35,24 @@ class App extends GetxController {
     debugPrint(res.toString());
   }
 
+  getCollection(String name) async {
+    try {
+      final res = await dio.get(
+        '${url.text}/collections/$name',
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+        ),
+      );
+      debugPrint(res.toString());
+      return res.data;
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+
   updateConnectionInfomation() {
     put('url', url.text);
     put('apiKey', apiKey.text);
