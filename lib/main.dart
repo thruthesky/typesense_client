@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:typesense_client/app.controller.dart';
+import 'package:typesense_client/collection.edit.screen.dart';
 import 'package:typesense_client/collection.screen.dart';
 import 'package:typesense_client/entry.screen.dart';
 
@@ -37,6 +38,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         EntryScreen.routeName: (_) => EntryScreen(),
         CollectionScreen.routeName: (_) => CollectionScreen(),
+        CollectionEditScreen.routeName: (_) => CollectionEditScreen(),
       },
     );
   }

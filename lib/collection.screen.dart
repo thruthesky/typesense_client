@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:typesense_client/app.controller.dart';
+import 'package:typesense_client/collection.edit.screen.dart';
 import 'package:typesense_client/widgets/connection_info.dart';
 
 class CollectionScreen extends StatelessWidget {
@@ -30,7 +31,10 @@ class CollectionScreen extends StatelessWidget {
                 Row(
                   children: [
                     Spacer(),
-                    ElevatedButton(onPressed: () {}, child: Text('Create Collection')),
+                    ElevatedButton(
+                      onPressed: () => Get.toNamed(CollectionEditScreen.routeName),
+                      child: Text('Create Collection'),
+                    ),
                   ],
                 ),
                 for (final col in App.of.collections)
