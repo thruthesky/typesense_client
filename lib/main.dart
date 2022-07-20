@@ -23,8 +23,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   _MyAppState() {
     Get.put(App());
-    App.of.apiKey.text = '12345a';
-    App.of.url.text = 'https://typesense.philgo.com';
   }
 
   @override
