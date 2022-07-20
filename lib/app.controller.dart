@@ -2,13 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Node;
 import 'package:hive/hive.dart';
+import 'package:typesense_client/collection.screen.dart';
 
 class App extends GetxController {
   static App get to => Get.find<App>();
   static App get of => Get.find<App>();
   final Dio dio = Dio();
 
-  ///
+  /// For Typesense connection informaton
   final url = TextEditingController(text: '');
   final apiKey = TextEditingController(text: '');
 
@@ -21,7 +22,7 @@ class App extends GetxController {
     apiKey.text = get('apiKey') ?? '';
   }
 
-  void loadCollections() async {
+  loadCollections() async {
     final res = await dio.get(
       '${url.text}/collections',
       options: Options(
@@ -67,5 +68,52 @@ class App extends GetxController {
   get(String key) {
     final box = Hive.box('settings');
     return box.get(key);
+  }
+
+  ///
+  /// EDIT COLLECTION
+  ///
+
+  final editSchema = TextEditingController(text: '');
+  editCollection() async {
+    try {
+      final res = await dio.post(
+        '${url.text}/collections',
+        data: editSchema.text,
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+        ),
+      );
+      debugPrint('res; $res');
+      Get.toNamed(CollectionScreen.routeName);
+    } catch (e) {
+      debugPrint(e.toString());
+
+      return null;
+    }
+  }
+
+  ///
+  /// DELETE COLLECTION
+  ///
+  deleteCollection(String name) async {
+    try {
+      final res = await dio.delete(
+        '${url.text}/collections/$name',
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+        ),
+      );
+      debugPrint('res; $res');
+
+      await loadCollections();
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 }

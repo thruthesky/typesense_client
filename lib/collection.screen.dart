@@ -32,19 +32,28 @@ class CollectionScreen extends StatelessWidget {
                   children: [
                     Spacer(),
                     ElevatedButton(
-                      onPressed: () =>
-                          Get.toNamed(CollectionEditScreen.routeName),
+                      onPressed: () => Get.toNamed(CollectionEditScreen.routeName),
                       child: Text('Create Collection'),
                     ),
                   ],
                 ),
                 for (final col in App.of.collections)
                   ExpansionTile(
+                    key: ValueKey(col['name']),
                     title: Text(
                       col['name'],
                     ),
                     children: [
-                      Text('Field Information'),
+                      Row(
+                        children: [
+                          Text('Field Information'),
+                          Spacer(),
+                          TextButton(
+                            onPressed: () => App.to.deleteCollection(col['name']),
+                            child: Text('DELETE'),
+                          ),
+                        ],
+                      ),
                       for (final field in col['fields'])
                         ListTile(
                           title: Text("${field['name']}"),
