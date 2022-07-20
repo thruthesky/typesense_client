@@ -23,9 +23,16 @@ class CollectionScreen extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ConnectionInfo(),
                 Divider(),
+                Row(
+                  children: [
+                    Spacer(),
+                    ElevatedButton(onPressed: () {}, child: Text('Create Collection')),
+                  ],
+                ),
                 for (final col in App.of.collections)
                   ExpansionTile(
                     title: Text(
@@ -35,8 +42,8 @@ class CollectionScreen extends StatelessWidget {
                       Text('Field Information'),
                       for (final field in col['fields'])
                         ListTile(
-                          leading: Text('Name'),
                           title: Text("${field['name']}"),
+                          subtitle: Text("${field['type']}, optional: ${field['optiona'] ?? ''}"),
                         ),
                       Text('@TODO Show list of document in new screen'),
                       Text('@TODO Add a document'),
