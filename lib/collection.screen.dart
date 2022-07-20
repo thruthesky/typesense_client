@@ -35,7 +35,7 @@ class CollectionScreen extends StatelessWidget {
                       Text('Field Information'),
                       for (final field in col['fields'])
                         ListTile(
-                          trailing: Text('Name'),
+                          leading: Text('Name'),
                           title: Text("${field['name']}"),
                         ),
                       Text('@TODO Show list of document in new screen'),
