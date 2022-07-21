@@ -225,7 +225,7 @@ class App extends GetxController {
     editDocumentController.text = '';
     Get.toNamed(
       DocumentListScreen.routeName,
-      parameters: {'name': name},
+      arguments: {'name': name},
     );
   }
 

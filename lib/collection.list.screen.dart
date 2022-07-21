@@ -52,14 +52,14 @@ class CollectionListScreen extends StatelessWidget {
                           TextButton(
                             onPressed: () => Get.toNamed(
                               DocumentListScreen.routeName,
-                              parameters: {'name': col['name']},
+                              arguments: {'name': col['name']},
                             ),
                             child: Text('LIST DOCUMENTS'),
                           ),
                           TextButton(
                             onPressed: () => Get.toNamed(
                               CollectionEditScreen.routeName,
-                              parameters: {'name': col['name']},
+                              arguments: {'name': col['name']},
                             ),
                             child: Text('EDIT'),
                           ),

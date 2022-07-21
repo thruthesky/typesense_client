@@ -14,8 +14,8 @@ class DocumentEditScreen extends StatefulWidget {
 }
 
 class _DocumentEditScreenState extends State<DocumentEditScreen> {
-  String? get name => Get.parameters['name'];
-  String? get id => Get.parameters['id'];
+  String? get collectionName => Get.arguments?['collectionName'];
+  String? get id => Get.arguments?['id'];
 
   bool get isUpdate => id != null;
 
@@ -27,7 +27,7 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
     {
       if (id != null) {
         App.to
-            .getDocument(name!, id!)
+            .getDocument(collectionName!, id!)
             .then((value) => setState(() => documentSchema = value.toString()));
       }
     }
@@ -46,13 +46,12 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name == null
-                    ? 'Create a new document to $name collection'
-                    : 'Updating document id $id from $name collection',
+                collectionName == null
+                    ? 'Create a new document to $collectionName collection'
+                    : 'Updating document id $id from $collectionName collection',
               ),
               if (isUpdate)
-                Text(
-                    'Document of $name collection\n with ID $id \n$documentSchema'),
+                Text('Document of $collectionName collection\n with ID $id \n$documentSchema'),
               TextField(
                 controller: App.of.editDocumentController,
                 decoration: InputDecoration(border: OutlineInputBorder()),
@@ -64,7 +63,7 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
                   TextButton(
                       onPressed: () => Get.toNamed(
                             DocumentListScreen.routeName,
-                            parameters: {'name': name!},
+                            arguments: {'name': collectionName!},
                           ),
                       child: Text('CANCEL')),
                   Spacer(),
@@ -74,9 +73,7 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
                       onPressed: App.of.editDocumentController.text == ''
                           ? null
                           : () async {
-                              App.to
-                                  .editDocument(name: name!, id: id)
-                                  .catchError(
+                              App.to.editDocument(name: collectionName!, id: id).catchError(
                                     (e) => Get.defaultDialog(
                                       title: 'ERROR',
                                       content: Text(

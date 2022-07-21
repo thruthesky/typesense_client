@@ -34,21 +34,13 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: EntryScreen.routeName,
       getPages: [
         GetPage(name: EntryScreen.routeName, page: () => EntryScreen()),
-        GetPage(
-            name: CollectionListScreen.routeName,
-            page: () => CollectionListScreen()),
-        GetPage(
-            name: CollectionEditScreen.routeName,
-            page: () => CollectionEditScreen()),
-        GetPage(
-            name: DocumentListScreen.routeName,
-            page: () => DocumentListScreen()),
-        GetPage(
-            name: DocumentEditScreen.routeName,
-            page: () => DocumentEditScreen()),
+        GetPage(name: CollectionListScreen.routeName, page: () => CollectionListScreen()),
+        GetPage(name: CollectionEditScreen.routeName, page: () => CollectionEditScreen()),
+        GetPage(name: DocumentListScreen.routeName, page: () => DocumentListScreen()),
+        GetPage(name: DocumentEditScreen.routeName, page: () => DocumentEditScreen()),
       ],
     );
   }

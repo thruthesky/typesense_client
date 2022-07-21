@@ -14,12 +14,11 @@ class DocumentListScreen extends StatefulWidget {
 }
 
 class _DocumentListScreenState extends State<DocumentListScreen> {
-  String get name => Get.parameters['name']!;
+  String get name => Get.arguments?['name']!;
 
   static const _pageSize = 10;
 
-  final PagingController<int, dynamic> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
 
   final query = TextEditingController(text: "q=*");
 
@@ -69,7 +68,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
               onPressed: () {
                 Get.toNamed(
                   DocumentEditScreen.routeName,
-                  parameters: {'name': name},
+                  arguments: {'collectionName': name},
                 );
               },
               icon: Icon(Icons.create))
@@ -100,38 +99,36 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                         onPressed: () {
                           Get.toNamed(
                             DocumentEditScreen.routeName,
-                            parameters: {
-                              'name': name,
-                              'id': item['document']['id']
-                            },
+                            arguments: {'collectionName': name, 'id': item['document']['id']},
                           );
                         },
                         child: Text('EDIT')),
                     TextButton(
-                        onPressed: () async {
-                          bool re = await showDialog(
-                            context: context,
-                            builder: (__) => AlertDialog(
-                              title: Text(
-                                  'Delete ${item['document']['id']} document'),
-                              content: Text(
-                                  'Do you want to delete ${item['document']['id']} document?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Get.back(result: false),
-                                  child: Text('NO'),
-                                ),
-                                TextButton(
-                                  onPressed: () => Get.back(result: true),
-                                  child: Text('YES'),
-                                ),
-                              ],
-                            ),
-                          );
-                          if (re == false) return;
-                          App.to.deleteDocument(name, item['document']['id']);
-                        },
-                        child: Text('DELETE')),
+                      onPressed: () async {
+                        bool re = await showDialog(
+                          context: context,
+                          builder: (__) => AlertDialog(
+                            title: Text('Delete ${item['document']['id']} document'),
+                            content:
+                                Text('Do you want to delete ${item['document']['id']} document?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Get.back(result: false),
+                                child: Text('NO'),
+                              ),
+                              TextButton(
+                                onPressed: () => Get.back(result: true),
+                                child: Text('YES'),
+                              ),
+                            ],
+                          ),
+                        );
+                        if (re == false) return;
+                        await App.to.deleteDocument(name, item['document']['id']);
+                        // _pagingController.itemList.remove(value)
+                      },
+                      child: Text('DELETE'),
+                    ),
                   ],
                 ),
               ],

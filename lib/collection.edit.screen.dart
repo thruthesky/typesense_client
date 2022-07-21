@@ -14,7 +14,7 @@ class CollectionEditScreen extends StatefulWidget {
 }
 
 class _CollectionEditScreenState extends State<CollectionEditScreen> {
-  String? get name => Get.parameters['name'];
+  String? get name => Get.arguments?['name'];
 
   bool get isUpdate => name != null;
 
@@ -25,8 +25,9 @@ class _CollectionEditScreenState extends State<CollectionEditScreen> {
     super.initState();
     {
       if (name != null) {
-        App.to.getCollection(name!).then(
-            (value) => setState(() => collectionSchema = value.toString()));
+        App.to
+            .getCollection(name!)
+            .then((value) => setState(() => collectionSchema = value.toString()));
       }
     }
   }
@@ -44,17 +45,14 @@ class _CollectionEditScreenState extends State<CollectionEditScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name == null
-                    ? 'Create a collection'
-                    : 'Updating $name collection',
+                name == null ? 'Create a collection' : 'Updating $name collection',
               ),
               if (isUpdate)
                 Text(
                   '* You can only update fields. You cannot rename the collection',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-              if (isUpdate)
-                Text('Schema of $name collection\n$collectionSchema'),
+              if (isUpdate) Text('Schema of $name collection\n$collectionSchema'),
               TextField(
                 controller: App.of.editSchema,
                 decoration: InputDecoration(border: OutlineInputBorder()),
@@ -64,8 +62,7 @@ class _CollectionEditScreenState extends State<CollectionEditScreen> {
               Row(
                 children: [
                   TextButton(
-                      onPressed: () =>
-                          Get.toNamed(CollectionListScreen.routeName),
+                      onPressed: () => Get.toNamed(CollectionListScreen.routeName),
                       child: Text('CANCEL')),
                   Spacer(),
                   Padding(
@@ -74,11 +71,9 @@ class _CollectionEditScreenState extends State<CollectionEditScreen> {
                       onPressed: App.of.editSchema.text == ''
                           ? null
                           : () async {
-                              App.to.editCollection(name: name).catchError(
-                                  (e) => Get.defaultDialog(
-                                      title: 'ERROR',
-                                      content: SingleChildScrollView(
-                                          child: Text(e.toString()))));
+                              App.to.editCollection(name: name).catchError((e) => Get.defaultDialog(
+                                  title: 'ERROR',
+                                  content: SingleChildScrollView(child: Text(e.toString()))));
                             },
                       child: Text('SUBMIT'),
                     ),
