@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide Node;
+import 'package:get/get.dart' hide Node, Response;
 import 'package:hive/hive.dart';
-import 'package:typesense_client/collection.screen.dart';
+import 'package:typesense_client/collection.list.screen.dart';
 
 class App extends GetxController {
   static App get to => Get.find<App>();
@@ -33,25 +35,40 @@ class App extends GetxController {
     );
     collections = res.data;
     update();
-    debugPrint(res.toString());
+    // debugPrint(res.toString());
   }
 
-  getCollection(String name) async {
-    try {
-      final res = await dio.get(
-        '${url.text}/collections/$name',
-        options: Options(
-          headers: {
-            "X-TYPESENSE-API-KEY": apiKey.text,
-          },
-        ),
-      );
-      debugPrint(res.toString());
-      return res.data;
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
-    }
+  Future<Map<String, dynamic>> searchDocuments({
+    required String collectionName,
+    required String parameters,
+    required int page,
+    required int perPage,
+  }) async {
+    final requestUrl =
+        '${url.text}/collections/$collectionName/documents/search?$parameters&page=$page&per_page=$perPage';
+    debugPrint(requestUrl);
+    final res = await dio.get(
+      requestUrl,
+      options: Options(
+        headers: {
+          "X-TYPESENSE-API-KEY": apiKey.text,
+        },
+      ),
+    );
+    return res.data;
+  }
+
+  Future getCollection(String name) async {
+    final res = await dio.get(
+      '${url.text}/collections/$name',
+      options: Options(
+        headers: {
+          "X-TYPESENSE-API-KEY": apiKey.text,
+        },
+      ),
+    );
+    debugPrint(res.data.toString());
+    return res.data;
   }
 
   updateConnectionInfomation() {
@@ -75,9 +92,19 @@ class App extends GetxController {
   ///
 
   final editSchema = TextEditingController(text: '');
-  editCollection() async {
+
+  Future editCollection({String? name}) async {
     try {
-      final res = await dio.post(
+      json.decode(editSchema.text) as Map<String, dynamic>;
+    } on FormatException catch (e) {
+      debugPrint('The provided string is not valid JSON, $e');
+      throw 'Please, input correct JSON syntax.';
+    }
+
+    Response res;
+
+    if (name == null) {
+      res = await dio.post(
         '${url.text}/collections',
         data: editSchema.text,
         options: Options(
@@ -86,13 +113,29 @@ class App extends GetxController {
           },
         ),
       );
-      debugPrint('res; $res');
-      Get.toNamed(CollectionScreen.routeName);
-    } catch (e) {
-      debugPrint(e.toString());
-
-      return null;
+    } else {
+      res = await dio.patch(
+        '${url.text}/collections/$name',
+        data: editSchema.text,
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+          validateStatus: (status) {
+            return (status ?? 0) < 500;
+          },
+        ),
+      );
     }
+
+    debugPrint('result, ${res.statusCode}');
+    debugPrint(res.toString());
+    if (res.statusCode == 400) {
+      throw res.data.toString();
+    }
+
+    editSchema.text = '';
+    Get.toNamed(CollectionListScreen.routeName);
   }
 
   ///

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:typesense_client/app.controller.dart';
 import 'package:typesense_client/collection.edit.screen.dart';
+import 'package:typesense_client/document.list.screen.dart';
 import 'package:typesense_client/widgets/connection_info.dart';
 
-class CollectionScreen extends StatelessWidget {
-  CollectionScreen({Key? key}) : super(key: key) {
+class CollectionListScreen extends StatelessWidget {
+  CollectionListScreen({Key? key}) : super(key: key) {
     App.to.loadCollections();
   }
 
@@ -19,7 +20,7 @@ class CollectionScreen extends StatelessWidget {
           'Collections',
         ),
       ),
-      body: GetBuilder<App>(builder: (context) {
+      body: GetBuilder<App>(builder: (_) {
         return SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.all(16),
@@ -49,7 +50,41 @@ class CollectionScreen extends StatelessWidget {
                           Text('Field Information'),
                           Spacer(),
                           TextButton(
-                            onPressed: () => App.to.deleteCollection(col['name']),
+                            onPressed: () => Get.toNamed(
+                              DocumentListScreen.routeName,
+                              parameters: {'name': col['name']},
+                            ),
+                            child: Text('LIST DOCUMENTS'),
+                          ),
+                          TextButton(
+                            onPressed: () => Get.toNamed(
+                              CollectionEditScreen.routeName,
+                              parameters: {'name': col['name']},
+                            ),
+                            child: Text('EDIT'),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              bool re = await showDialog(
+                                context: context,
+                                builder: (__) => AlertDialog(
+                                  title: Text('Delete ${col['name']} Collection'),
+                                  content: Text('Do you want to delete ${col['name']} collection?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Get.back(result: false),
+                                      child: Text('NO'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Get.back(result: true),
+                                      child: Text('YES'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              if (re == false) return;
+                              App.to.deleteCollection(col['name']);
+                            },
                             child: Text('DELETE'),
                           ),
                         ],
@@ -61,10 +96,6 @@ class CollectionScreen extends StatelessWidget {
                             subtitleFieldOptions(field),
                           ),
                         ),
-                      Text('@TODO Show list of document in new screen'),
-                      Text('@TODO Add a document'),
-                      Text('@TODO Update a document'),
-                      Text('@TODO Delete a document'),
                     ],
                   ),
               ],

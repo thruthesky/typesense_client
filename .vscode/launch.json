@@ -13,6 +13,14 @@
       "deviceId": "chrome"
     },
     {
+      "name": "iPhone 13 Pro Max - Simulator",
+      "request": "launch",
+      "type": "dart",
+      // Run the web app in the "web" folder via "webdev"
+      "program": "lib/main.dart",
+      "deviceId": "ECE40623-ACC2-4729-8DD4-B3DBB46D4B25"
+    },
+    {
       // A name for the launch config. This will show in the dropdown on the Run side bar.
       "name": "Current File (release mode)",
 
