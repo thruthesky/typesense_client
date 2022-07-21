@@ -63,7 +63,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
       appBar: AppBar(
         title: Text(name),
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.create))],
-        bottom: AppBarBotom(
+        bottom: AppBarBottom(
           height: 60,
           child: Container(
             color: Colors.white,
@@ -98,8 +98,8 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
   }
 }
 
-class AppBarBotom extends StatelessWidget with PreferredSizeWidget {
-  AppBarBotom({
+class AppBarBottom extends StatelessWidget with PreferredSizeWidget {
+  AppBarBottom({
     required this.child,
     required this.height,
     Key? key,
