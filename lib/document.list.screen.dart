@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:typesense_client/app.controller.dart';
+import 'package:typesense_client/document.edit.dart';
 
 class DocumentListScreen extends StatefulWidget {
   const DocumentListScreen({Key? key}) : super(key: key);
@@ -17,7 +18,8 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
 
   static const _pageSize = 10;
 
-  final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
+  final PagingController<int, dynamic> _pagingController =
+      PagingController(firstPageKey: 0);
 
   final query = TextEditingController(text: "q=*");
 
@@ -62,7 +64,16 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.create))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.toNamed(
+                  DocumentEditScreen.routeName,
+                  parameters: {'name': name},
+                );
+              },
+              icon: Icon(Icons.create))
+        ],
         bottom: AppBarBotom(
           height: 60,
           child: Container(
@@ -85,8 +96,42 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                 Row(
                   children: [
                     Spacer(),
-                    TextButton(onPressed: () {}, child: Text('EDIT')),
-                    TextButton(onPressed: () {}, child: Text('DELETE')),
+                    TextButton(
+                        onPressed: () {
+                          Get.toNamed(
+                            DocumentEditScreen.routeName,
+                            parameters: {
+                              'name': name,
+                              'id': item['document']['id']
+                            },
+                          );
+                        },
+                        child: Text('EDIT')),
+                    TextButton(
+                        onPressed: () async {
+                          bool re = await showDialog(
+                            context: context,
+                            builder: (__) => AlertDialog(
+                              title: Text(
+                                  'Delete ${item['document']['id']} document'),
+                              content: Text(
+                                  'Do you want to delete ${item['document']['id']} document?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Get.back(result: false),
+                                  child: Text('NO'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Get.back(result: true),
+                                  child: Text('YES'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (re == false) return;
+                          App.to.deleteDocument(name, item['document']['id']);
+                        },
+                        child: Text('DELETE')),
                   ],
                 ),
               ],

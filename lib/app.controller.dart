@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Node, Response;
 import 'package:hive/hive.dart';
 import 'package:typesense_client/collection.list.screen.dart';
+import 'package:typesense_client/document.list.screen.dart';
 
 class App extends GetxController {
   static App get to => Get.find<App>();
@@ -33,6 +34,7 @@ class App extends GetxController {
         },
       ),
     );
+
     collections = res.data;
     update();
     // debugPrint(res.toString());
@@ -61,6 +63,19 @@ class App extends GetxController {
   Future getCollection(String name) async {
     final res = await dio.get(
       '${url.text}/collections/$name',
+      options: Options(
+        headers: {
+          "X-TYPESENSE-API-KEY": apiKey.text,
+        },
+      ),
+    );
+    debugPrint(res.data.toString());
+    return res.data;
+  }
+
+  Future getDocument(String collectionName, String id) async {
+    final res = await dio.get(
+      '${url.text}/collections/$collectionName/documents/$id',
       options: Options(
         headers: {
           "X-TYPESENSE-API-KEY": apiKey.text,
@@ -154,6 +169,81 @@ class App extends GetxController {
       debugPrint('res; $res');
 
       await loadCollections();
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+
+  jsonDataCheck(String text) {
+    try {
+      json.decode(text) as Map<String, dynamic>;
+    } on FormatException catch (e) {
+      debugPrint('The provided string is not valid JSON, $e');
+      throw 'Please, input correct JSON syntax.';
+    }
+  }
+
+  final editDocumentController = TextEditingController(text: '');
+
+  Future editDocument({required String name, String? id}) async {
+    jsonDataCheck(editDocumentController.text);
+
+    Response res;
+
+    if (id == null) {
+      res = await dio.post(
+        '${url.text}/collections/$name/documents',
+        data: editDocumentController.text,
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+        ),
+      );
+    } else {
+      res = await dio.patch(
+        '${url.text}/collections/$name/documents/$id',
+        data: editDocumentController.text,
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+          validateStatus: (status) {
+            return (status ?? 0) < 500;
+          },
+        ),
+      );
+    }
+
+    debugPrint('result, ${res.statusCode}');
+    debugPrint(res.toString());
+    if (res.statusCode == 400) {
+      throw res.data.toString();
+    }
+
+    editDocumentController.text = '';
+    Get.toNamed(
+      DocumentListScreen.routeName,
+      parameters: {'name': name},
+    );
+  }
+
+  ///
+  /// DELETE COLLECTION
+  ///
+  deleteDocument(String name, String id) async {
+    try {
+      final res = await dio.delete(
+        '${url.text}/collections/$name/documents/$id',
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+        ),
+      );
+      debugPrint('res; $res');
+      return res;
     } catch (e) {
       debugPrint(e.toString());
       return null;

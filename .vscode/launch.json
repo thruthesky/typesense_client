@@ -20,6 +20,14 @@
       "program": "lib/main.dart",
       "deviceId": "ECE40623-ACC2-4729-8DD4-B3DBB46D4B25"
     },
+    
+    {
+      "name": "emulator-5554",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "emulator-5554"
+    },
     {
       // A name for the launch config. This will show in the dropdown on the Run side bar.
       "name": "Current File (release mode)",
