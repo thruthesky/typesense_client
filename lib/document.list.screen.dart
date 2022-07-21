@@ -19,6 +19,8 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
 
   final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
 
+  final query = TextEditingController(text: "q=*");
+
   @override
   void initState() {
     _pagingController.addPageRequestListener((pageKey) {
@@ -58,15 +60,59 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(name)),
+      appBar: AppBar(
+        title: Text(name),
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.create))],
+        bottom: AppBarBotom(
+          height: 60,
+          child: Container(
+            color: Colors.white,
+            child: TextField(
+              controller: query,
+              decoration: InputDecoration(label: Text('Query parameters')),
+            ),
+          ),
+        ),
+      ),
       body: PagedListView<int, dynamic>(
         pagingController: _pagingController,
         builderDelegate: PagedChildBuilderDelegate<dynamic>(
           itemBuilder: (context, item, index) => ListTile(
-            title: Text("($index) ${item['document']['id']} $item"),
+            title: Text("($index) ${item['document']['id']}"),
+            subtitle: Column(
+              children: [
+                Text("$item"),
+                Row(
+                  children: [
+                    Spacer(),
+                    TextButton(onPressed: () {}, child: Text('EDIT')),
+                    TextButton(onPressed: () {}, child: Text('DELETE')),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+class AppBarBotom extends StatelessWidget with PreferredSizeWidget {
+  AppBarBotom({
+    required this.child,
+    required this.height,
+    Key? key,
+  }) : super(key: key);
+
+  final Widget child;
+  final double height;
+
+  @override
+  Size get preferredSize => Size.fromHeight(height);
+
+  @override
+  Widget build(BuildContext context) {
+    return child;
   }
 }
