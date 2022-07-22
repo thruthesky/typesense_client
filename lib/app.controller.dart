@@ -126,6 +126,9 @@ class App extends GetxController {
           headers: {
             "X-TYPESENSE-API-KEY": apiKey.text,
           },
+          validateStatus: (status) {
+            return (status ?? 0) < 500;
+          },
         ),
       );
     } else {
@@ -198,6 +201,9 @@ class App extends GetxController {
         options: Options(
           headers: {
             "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+          validateStatus: (status) {
+            return (status ?? 0) < 500;
           },
         ),
       );
