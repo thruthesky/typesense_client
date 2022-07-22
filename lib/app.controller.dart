@@ -61,7 +61,7 @@ class App extends GetxController {
       ),
     );
     debugPrint(res.data.toString());
-    if (res.statusCode == 400) {
+    if (res.statusCode! > 299) {
       throw res.data.toString();
     }
     return res.data;
@@ -155,7 +155,7 @@ class App extends GetxController {
 
     debugPrint('result, ${res.statusCode}');
     debugPrint(res.toString());
-    if (res.statusCode == 400) {
+    if (res.statusCode! > 299) {
       throw res.data.toString();
     }
 
