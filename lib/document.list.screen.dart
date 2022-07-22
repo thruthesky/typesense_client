@@ -15,10 +15,12 @@ class DocumentListScreen extends StatefulWidget {
 
 class _DocumentListScreenState extends State<DocumentListScreen> {
   String get name => Get.arguments?['name']!;
+  List<dynamic> get fields => Get.arguments?['fields'] ?? [];
 
   static const _pageSize = 10;
 
-  final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
+  final PagingController<int, dynamic> _pagingController =
+      PagingController(firstPageKey: 0);
 
   final query = TextEditingController(text: "q=*");
 
@@ -68,7 +70,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
               onPressed: () {
                 Get.toNamed(
                   DocumentEditScreen.routeName,
-                  arguments: {'collectionName': name},
+                  arguments: {'collectionName': name, "fields": fields},
                 );
               },
               icon: Icon(Icons.create))
@@ -77,9 +79,14 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
           height: 60,
           child: Container(
             color: Colors.white,
-            child: TextField(
-              controller: query,
-              decoration: InputDecoration(label: Text('Query parameters')),
+            child: Column(
+              children: [
+                TextField(
+                  controller: query,
+                  decoration: InputDecoration(label: Text('Query parameters')),
+                ),
+                Text(getFieldsDescription())
+              ],
             ),
           ),
         ),
@@ -99,7 +106,11 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                         onPressed: () {
                           Get.toNamed(
                             DocumentEditScreen.routeName,
-                            arguments: {'collectionName': name, 'id': item['document']['id']},
+                            arguments: {
+                              'collectionName': name,
+                              'id': item['document']['id'],
+                              "fields": fields
+                            },
                           );
                         },
                         child: Text('EDIT')),
@@ -108,9 +119,10 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                         bool re = await showDialog(
                           context: context,
                           builder: (__) => AlertDialog(
-                            title: Text('Delete ${item['document']['id']} document'),
-                            content:
-                                Text('Do you want to delete ${item['document']['id']} document?'),
+                            title: Text(
+                                'Delete ${item['document']['id']} document'),
+                            content: Text(
+                                'Do you want to delete ${item['document']['id']} document?'),
                             actions: [
                               TextButton(
                                 onPressed: () => Get.back(result: false),
@@ -124,8 +136,11 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                           ),
                         );
                         if (re == false) return;
-                        await App.to.deleteDocument(name, item['document']['id']);
-                        // _pagingController.itemList.remove(value)
+                        await App.to
+                            .deleteDocument(name, item['document']['id']);
+                        setState(() {
+                          _pagingController.itemList?.removeAt(index);
+                        });
                       },
                       child: Text('DELETE'),
                     ),
@@ -137,6 +152,15 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
         ),
       ),
     );
+  }
+
+  getFieldsDescription() {
+    if (fields.isEmpty) return '';
+    String des = '';
+    for (final field in fields) {
+      des = "$des${field['name']}: ${field['type']}, ";
+    }
+    return des;
   }
 }
 

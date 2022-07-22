@@ -33,7 +33,8 @@ class CollectionListScreen extends StatelessWidget {
                   children: [
                     Spacer(),
                     ElevatedButton(
-                      onPressed: () => Get.toNamed(CollectionEditScreen.routeName),
+                      onPressed: () =>
+                          Get.toNamed(CollectionEditScreen.routeName),
                       child: Text('Create Collection'),
                     ),
                   ],
@@ -52,14 +53,19 @@ class CollectionListScreen extends StatelessWidget {
                           TextButton(
                             onPressed: () => Get.toNamed(
                               DocumentListScreen.routeName,
-                              arguments: {'name': col['name']},
+                              arguments: {
+                                'name': col['name'],
+                                "fields": col['fields']
+                              },
                             ),
                             child: Text('LIST DOCUMENTS'),
                           ),
                           TextButton(
                             onPressed: () => Get.toNamed(
                               CollectionEditScreen.routeName,
-                              arguments: {'name': col['name']},
+                              arguments: {
+                                'name': col['name'],
+                              },
                             ),
                             child: Text('EDIT'),
                           ),
@@ -68,8 +74,10 @@ class CollectionListScreen extends StatelessWidget {
                               bool re = await showDialog(
                                 context: context,
                                 builder: (__) => AlertDialog(
-                                  title: Text('Delete ${col['name']} Collection'),
-                                  content: Text('Do you want to delete ${col['name']} collection?'),
+                                  title:
+                                      Text('Delete ${col['name']} Collection'),
+                                  content: Text(
+                                      'Do you want to delete ${col['name']} collection?'),
                                   actions: [
                                     TextButton(
                                       onPressed: () => Get.back(result: false),

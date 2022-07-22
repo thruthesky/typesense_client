@@ -16,6 +16,7 @@ class DocumentEditScreen extends StatefulWidget {
 class _DocumentEditScreenState extends State<DocumentEditScreen> {
   String? get collectionName => Get.arguments?['collectionName'];
   String? get id => Get.arguments?['id'];
+  List<dynamic> get fields => Get.arguments?['fields'] ?? [];
 
   bool get isUpdate => id != null;
 
@@ -51,7 +52,9 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
                     : 'Updating document id $id from $collectionName collection',
               ),
               if (isUpdate)
-                Text('Document of $collectionName collection\n with ID $id \n$documentSchema'),
+                Text(
+                    '$collectionName collection\n Document ID $id \n$documentSchema'),
+              Text(getFieldsDescription()),
               TextField(
                 controller: App.of.editDocumentController,
                 decoration: InputDecoration(border: OutlineInputBorder()),
@@ -73,7 +76,9 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
                       onPressed: App.of.editDocumentController.text == ''
                           ? null
                           : () async {
-                              App.to.editDocument(name: collectionName!, id: id).catchError(
+                              App.to
+                                  .editDocument(name: collectionName!, id: id)
+                                  .catchError(
                                     (e) => Get.defaultDialog(
                                       title: 'ERROR',
                                       content: Text(
@@ -94,6 +99,15 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
       ),
     );
   }
+
+  getFieldsDescription() {
+    if (fields.isEmpty) return '';
+    String des = '';
+    for (final field in fields) {
+      des = "$des${field['name']}: ${field['type']}, ";
+    }
+    return des;
+  }
 }
 
 class HelpLinks extends StatelessWidget {
@@ -110,7 +124,7 @@ class HelpLinks extends StatelessWidget {
           onPressed: () {
             launchUrl(
               Uri.parse(
-                'https://typesense.org/docs/0.19.0/api/documents.html#index-a-document',
+                'https://typesense.org/docs/0.23.1/api/documents.html#index-a-document',
               ),
             );
           },
@@ -120,7 +134,7 @@ class HelpLinks extends StatelessWidget {
           onPressed: () {
             launchUrl(
               Uri.parse(
-                'https://typesense.org/docs/0.19.0/api/documents.html#retrieve-a-document',
+                'https://typesense.org/docs/0.23.1/api/documents.html#retrieve-a-document',
               ),
             );
           },
@@ -130,7 +144,7 @@ class HelpLinks extends StatelessWidget {
           onPressed: () {
             launchUrl(
               Uri.parse(
-                'https://typesense.org/docs/0.19.0/api/documents.html#update-a-document',
+                'https://typesense.org/docs/0.23.1/api/documents.html#update-a-document',
               ),
             );
           },
@@ -140,7 +154,7 @@ class HelpLinks extends StatelessWidget {
           onPressed: () {
             launchUrl(
               Uri.parse(
-                'https://typesense.org/docs/0.19.0/api/documents.html#delete-documents',
+                'https://typesense.org/docs/0.23.1/api/documents.html#delete-documents',
               ),
             );
           },
@@ -150,7 +164,7 @@ class HelpLinks extends StatelessWidget {
           onPressed: () {
             launchUrl(
               Uri.parse(
-                'https://typesense.org/docs/0.19.0/api/documents.html',
+                'https://typesense.org/docs/0.23.1/api/documents.html',
               ),
             );
           },
