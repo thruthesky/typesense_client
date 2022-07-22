@@ -55,8 +55,15 @@ class App extends GetxController {
         headers: {
           "X-TYPESENSE-API-KEY": apiKey.text,
         },
+        validateStatus: (status) {
+          return (status ?? 0) < 500;
+        },
       ),
     );
+    debugPrint(res.data.toString());
+    if (res.statusCode == 400) {
+      throw res.data.toString();
+    }
     return res.data;
   }
 

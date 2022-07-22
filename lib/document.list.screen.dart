@@ -42,7 +42,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
       debugPrint('pageKey; $pageKey');
       final res = await App.to.searchDocuments(
         collectionName: name,
-        parameters: 'q=*',
+        parameters: query.text,
         page: (pageKey ~/ _pageSize) + 1,
         perPage: _pageSize,
       );
@@ -55,6 +55,11 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
         _pagingController.appendPage(newItems, nextPageKey.toInt());
       }
     } catch (error) {
+      showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                title: Text('$error'),
+              ));
       _pagingController.error = error;
     }
   }
@@ -79,7 +84,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
               icon: Icon(Icons.create))
         ],
         bottom: AppBarBottom(
-          height: 70,
+          height: 100,
           child: Container(
             color: Colors.white,
             child: Column(
@@ -87,8 +92,17 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                 TextField(
                   controller: query,
                   decoration: InputDecoration(label: Text('Query parameters')),
+                  onSubmitted: (q) {
+                    _pagingController.refresh();
+                  },
                 ),
-                Text(getFieldsDescription())
+                SizedBox(
+                  height: 48,
+                  child: Text(
+                    getFieldsDescription(),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                )
               ],
             ),
           ),
