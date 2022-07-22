@@ -69843,7 +69843,9 @@ s=3
 return A.P(p.ax.rh(0,m,A.kk(A.au(["X-TYPESENSE-API-KEY",p.ch.a.a],t.N,o),new A.TC()),o),$async$rA)
 case 3:n=f
 A.eh().$1(J.bP(n.a))
-if(n.d===400)throw A.c(J.bP(n.a))
+o=n.d
+o.toString
+if(o>299)throw A.c(J.bP(n.a))
 q=n.a
 s=1
 break
@@ -69903,7 +69905,8 @@ case 6:case 3:f=c
 m=f.d
 A.eh().$1("result, "+A.d(m))
 A.eh().$1(f.j(0))
-if(m===400)throw A.c(J.bP(f.a))
+m.toString
+if(m>299)throw A.c(J.bP(f.a))
 j.sbX(0,"")
 A.nj($.aA(),"/collection",null,l)
 return A.T(null,r)}})
