@@ -76,7 +76,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
               icon: Icon(Icons.create))
         ],
         bottom: AppBarBottom(
-          height: 60,
+          height: 70,
           child: Container(
             color: Colors.white,
             child: Column(
