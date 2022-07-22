@@ -19,8 +19,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
 
   static const _pageSize = 10;
 
-  final PagingController<int, dynamic> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
 
   final query = TextEditingController(text: "q=*");
 
@@ -67,11 +66,15 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
         title: Text(name),
         actions: [
           IconButton(
-              onPressed: () {
-                Get.toNamed(
+              onPressed: () async {
+                final re = await Get.toNamed(
                   DocumentEditScreen.routeName,
                   arguments: {'collectionName': name, "fields": fields},
                 );
+
+                if (re == true) {
+                  _pagingController.refresh();
+                }
               },
               icon: Icon(Icons.create))
         ],
@@ -103,8 +106,8 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                   children: [
                     Spacer(),
                     TextButton(
-                        onPressed: () {
-                          Get.toNamed(
+                        onPressed: () async {
+                          final re = await Get.toNamed(
                             DocumentEditScreen.routeName,
                             arguments: {
                               'collectionName': name,
@@ -112,6 +115,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                               "fields": fields
                             },
                           );
+                          if (re == true) _pagingController.refresh();
                         },
                         child: Text('EDIT')),
                     TextButton(
@@ -119,10 +123,9 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                         bool re = await showDialog(
                           context: context,
                           builder: (__) => AlertDialog(
-                            title: Text(
-                                'Delete ${item['document']['id']} document'),
-                            content: Text(
-                                'Do you want to delete ${item['document']['id']} document?'),
+                            title: Text('Delete ${item['document']['id']} document'),
+                            content:
+                                Text('Do you want to delete ${item['document']['id']} document?'),
                             actions: [
                               TextButton(
                                 onPressed: () => Get.back(result: false),
@@ -136,8 +139,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
                           ),
                         );
                         if (re == false) return;
-                        await App.to
-                            .deleteDocument(name, item['document']['id']);
+                        await App.to.deleteDocument(name, item['document']['id']);
                         setState(() {
                           _pagingController.itemList?.removeAt(index);
                         });

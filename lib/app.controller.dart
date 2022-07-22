@@ -229,10 +229,15 @@ class App extends GetxController {
     }
 
     editDocumentController.text = '';
-    Get.toNamed(
-      DocumentListScreen.routeName,
-      arguments: {'name': name},
-    );
+    // Get.toNamed(
+    //   DocumentListScreen.routeName,
+    //   arguments: {'name': name},
+    // );
+    // Get.offNamed(
+    //   DocumentListScreen.routeName,
+    //   arguments: {'name': name},
+    // );
+    Get.back(result: true);
   }
 
   ///

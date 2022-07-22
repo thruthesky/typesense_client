@@ -23,12 +23,13 @@ class _CollectionEditScreenState extends State<CollectionEditScreen> {
   @override
   void initState() {
     super.initState();
-    {
-      if (name != null) {
-        App.to
-            .getCollection(name!)
-            .then((value) => setState(() => collectionSchema = value.toString()));
-      }
+
+    App.of.editSchema.text = '';
+
+    if (name != null) {
+      App.to
+          .getCollection(name!)
+          .then((value) => setState(() => collectionSchema = value.toString()));
     }
   }
 

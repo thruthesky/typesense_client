@@ -51,9 +51,7 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
                     ? 'Create a new document to $collectionName collection'
                     : 'Updating document id $id from $collectionName collection',
               ),
-              if (isUpdate)
-                Text(
-                    '$collectionName collection\n Document ID $id \n$documentSchema'),
+              if (isUpdate) Text('$collectionName collection\n Document ID $id \n$documentSchema'),
               Text(getFieldsDescription()),
               TextField(
                 controller: App.of.editDocumentController,
@@ -63,12 +61,7 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
               ),
               Row(
                 children: [
-                  TextButton(
-                      onPressed: () => Get.toNamed(
-                            DocumentListScreen.routeName,
-                            arguments: {'name': collectionName!},
-                          ),
-                      child: Text('CANCEL')),
+                  TextButton(onPressed: () => Get.back(), child: Text('CANCEL')),
                   Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
@@ -76,9 +69,7 @@ class _DocumentEditScreenState extends State<DocumentEditScreen> {
                       onPressed: App.of.editDocumentController.text == ''
                           ? null
                           : () async {
-                              App.to
-                                  .editDocument(name: collectionName!, id: id)
-                                  .catchError(
+                              App.to.editDocument(name: collectionName!, id: id).catchError(
                                     (e) => Get.defaultDialog(
                                       title: 'ERROR',
                                       content: Text(
