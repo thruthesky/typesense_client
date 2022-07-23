@@ -10550,9 +10550,11 @@ RP:function RP(){},
 ayW(a,b,c){return new A.wf(A.aiS(a.a,b.a,c))},
 wf:function wf(a){this.a=a},
 Nm:function Nm(){},
-wn:function wn(a,b,c){this.d=a
-this.r=b
-this.a=c},
+wn:function wn(a,b,c,d){var _=this
+_.d=a
+_.e=b
+_.r=c
+_.a=d},
 B1:function B1(a,b,c,d,e,f,g){var _=this
 _.d=a
 _.e=b
@@ -42482,37 +42484,39 @@ return A.a58(B.mL,A.a(this.x,"_iconTurns"))},
 WV(a){this.a.toString
 if(this.Gm(null)!==B.mY)return null
 return A.a58(B.mL,A.a(this.x,"_iconTurns"))},
-WI(a,b){var s,r,q,p,o,n=this,m=null,l=A.ajc(a),k=A.a(n.z,"_borderColor"),j=k.b
-k=k.a
-s=j.aa(0,k.gm(k))
-if(s==null)s=B.ab
-k=A.a(n.at,"_backgroundColor")
-j=k.b
-k=k.a
-k=j.aa(0,k.gm(k))
-if(k==null)k=l.a
-if(k==null)k=B.ab
-j=A.a(n.as,"_iconColor")
-r=j.b
+WI(a,b){var s,r,q,p,o,n,m=this,l=null,k=A.ajc(a),j=A.a(m.z,"_borderColor"),i=j.b
 j=j.a
-j=r.aa(0,j.gm(j))
-if(j==null)j=l.f
-r=A.a(n.Q,"_headerColor")
+s=i.aa(0,j.gm(j))
+if(s==null)s=B.ab
+j=A.a(m.at,"_backgroundColor")
+i=j.b
+j=j.a
+j=i.aa(0,j.gm(j))
+if(j==null)j=k.a
+if(j==null)j=B.ab
+i=A.a(m.as,"_iconColor")
+r=i.b
+i=i.a
+i=r.aa(0,i.gm(i))
+if(i==null)i=k.f
+r=A.a(m.Q,"_headerColor")
 q=r.b
 r=r.a
 r=q.aa(0,r.gm(r))
-n.a.toString
-q=n.WL(a)
-p=n.a.d
-o=n.WV(a)
-j=A.azV(A.ajx(l.c,q,n.gYH(),m,p,o),j,r)
-n.a.toString
-r=l.d
+m.a.toString
+q=m.WL(a)
+p=m.a
+o=p.d
+p=p.e
+n=m.WV(a)
+i=A.azV(A.ajx(k.c,q,m.gYH(),p,o,n),i,r)
+m.a.toString
+r=k.d
 if(r==null)r=B.a7
-q=A.a(n.y,"_heightFactor")
+q=A.a(m.y,"_heightFactor")
 p=q.b
 q=q.a
-return A.fD(m,A.em(A.b([j,A.UV(new A.f4(r,m,p.aa(0,q.gm(q)),b,m),B.au)],t.p),B.ag,B.aq,B.cC),m,m,new A.eJ(k,m,new A.df(new A.d0(s,1,B.b9),B.q,new A.d0(s,1,B.b9),B.q),m,m,m,B.bm),m,m,m,m,m)},
+return A.fD(l,A.em(A.b([i,A.UV(new A.f4(r,l,p.aa(0,q.gm(q)),b,l),B.au)],t.p),B.ag,B.aq,B.cC),l,l,new A.eJ(j,l,new A.df(new A.d0(s,1,B.b9),B.q,new A.d0(s,1,B.b9),B.q),l,l,l,B.bm),l,l,l,l,l)},
 bB(){var s,r,q,p,o=this,n=o.c
 n.toString
 s=A.an(n)
@@ -44413,50 +44417,49 @@ default:s=a0}p=a.zO(a1,a2,s.b)
 a.z3(a1,a2)
 o=s.es(p)
 n=A.uZ(a.d,B.S,B.L,o)
-a4=a.e
-if(a4!=null){a5=a1.R8
-m=a5.z
-m.toString
-p=a.zO(a1,a2,a5.Q.b)
+a4=a1.R8
+a5=a4.z
+a5.toString
+p=a.zO(a1,a2,a4.Q.b)
 a.z3(a1,a2)
-l=m.es(p)
-k=A.uZ(a4,B.S,B.L,l)}else{l=a0
-k=l}a4=a.f
+m=a5.es(p)
+l=A.uZ(a.e,B.S,B.L,m)
+a4=a.f
 if(a4!=null){r.toString
-j=A.uZ(a4,B.S,B.L,r)}else j=a0
+k=A.uZ(a4,B.S,B.L,r)}else k=a0
 a4=a7.R(t.I)
 a4.toString
-i=a4.f
+j=a4.f
 a4=a.ax
-a4=a4==null?a0:a4.O(i)
+a4=a4==null?a0:a4.O(j)
 if(a4==null){a4=a2.r
-a4=a4==null?a0:a4.O(i)
-h=a4}else h=a4
-if(h==null)h=B.e5
+a4=a4==null?a0:a4.O(j)
+i=a4}else i=a4
+if(i==null)i=B.e5
 a4=A.aZ(t.ui)
 a5=a.ch==null&&!0
 if(a5)a4.G(0,B.ad)
 a5=A.e6(a0,a4,t.WV)
-if(a5==null)g=a0
-else g=a5
-if(g==null)g=B.lm.O(a4)
+if(a5==null)h=a0
+else h=a5
+if(h==null)h=B.lm.O(a4)
 a4=a2.b
 a5=a4==null?B.lJ:a4
-m=a2.w
-p=m==null?a1.ah.w:m
-m=p==null?B.ab:p
+g=a2.w
+p=g==null?a1.ah.w:g
+g=p==null?B.ab:p
 a.z3(a1,a2)
 f=o.Q
 f.toString
-e=l==null?a0:l.Q
+e=m.Q
 d=a2.y
 if(d==null)d=16
 c=a2.z
 if(c==null)c=4
 b=a2.Q
 if(b==null)b=40
-a3=A.a5o(!1,A.qp(new A.Oh(q,n,k,j,!1,!1,a1.z,i,f,e,d,c,b,a0),new A.cO(a3,a0,a0,a0)),h,!1)
-return A.a0c(!1,!0,A.bQ(a0,new A.wR(a3,new A.jg(m,a0,a0,a0,a5),a0),!1,a0,!0,!1,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,!1,a0,a0,a0,a0),a4,!0,a0,a0,a0,a0,g,a0,a0,a0,a0,a.ch,a0,a0,a0)}}
+a3=A.a5o(!1,A.qp(new A.Oh(q,n,l,k,!1,!1,a1.z,j,f,e,d,c,b,a0),new A.cO(a3,a0,a0,a0)),i,!1)
+return A.a0c(!1,!0,A.bQ(a0,new A.wR(a3,new A.jg(g,a0,a0,a0,a5),a0),!1,a0,!0,!1,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,!1,a0,a0,a0,a0),a4,!0,a0,a0,a0,a0,h,a0,a0,a0,a0,a.ch,a0,a0,a0)}}
 A.hH.prototype={
 j(a){return"_ListTileSlot."+this.b}}
 A.Oh.prototype={
@@ -70109,29 +70112,30 @@ A.pK.prototype={
 I(a,b){var s=null
 return A.JT(A.Tr(s,s,A.aH("Collections",s,s,s,s,s,s)),A.anK(new A.Va(this,b),s,s,s,t.G))}}
 A.Va.prototype={
-$1(a2){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=null,a="name",a0=t.p,a1=A.b([new A.FG(b),new A.G9(b),A.o8(A.b([new A.m0(b),A.Xn(!1,A.aH("Create Collection",b,b,b,b,b,b),B.u,b,b,b,b,b,new A.V6(),b)],a0),B.ag,B.a2)],a0)
+$1(a3){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a=null,a0="name",a1=t.p,a2=A.b([new A.FG(a),new A.G9(a),A.o8(A.b([new A.m0(a),A.Xn(!1,A.aH("Create Collection",a,a,a,a,a,a),B.u,a,a,a,a,a,new A.V6(),a)],a1),B.ag,B.a2)],a1)
 $.aw()
 s=$.aP
 if(s==null)s=$.aP=B.B
-s=J.al(s.cE(0,b,t.G).CW)
+s=J.al(s.cE(0,a,t.G).CW)
 r=t.Nf
 q=this.b
 for(;s.u();){p=s.gF(s)
 o=J.ao(p)
-n=o.h(p,a)
-m=A.aH(o.h(p,a),b,b,b,b,b,b)
-l=A.b([A.o8(A.b([A.aH("Field Information",b,b,b,b,b,b),new A.m0(b),A.eb(A.aH("LIST DOCUMENTS",b,b,b,b,b,b),new A.V7(p),b),A.eb(A.aH("EDIT",b,b,b,b,b,b),new A.V8(p),b),A.eb(A.aH("DELETE",b,b,b,b,b,b),new A.V9(q,p),b)],a0),B.ag,B.a2)],a0)
-for(o=J.al(o.h(p,"fields"));o.u();){k=o.gF(o)
-j=J.ao(k)
-i=A.aH(A.d(j.h(k,a)),b,b,b,b,b,b)
-h=A.d(j.h(k,"index"))
-g=A.d(j.h(k,"type"))
-f=A.d(j.h(k,"optional"))
-e=A.d(j.h(k,"sort"))
-d=A.d(j.h(k,"facet"))
-c=A.d(j.h(k,"infix"))
-j=j.h(k,"locale")
-l.push(A.ajx(b,b,b,A.aH("index: "+h+", type: "+g+", optional: "+f+", sort: "+e+", facet: "+d+", infix: "+c+", locale: "+A.d(j==null?"":j),b,b,b,b,b,b),i,b))}a1.push(new A.wn(m,l,new A.dw(n,r)))}return A.a6w(A.fD(b,A.em(a1,B.bG,B.aq,B.a2),b,b,b,b,b,b,new A.aI(16,16,16,16),b))},
+n=o.h(p,a0)
+m=A.aH(o.h(p,a0),a,a,a,a,a,a)
+l=A.aH("No. of documents: "+A.d(o.h(p,"num_documents"))+", Default sorting fields: "+A.d(o.h(p,"default_sorting_field")),a,a,a,a,a,a)
+k=A.b([A.o8(A.b([A.aH("Field Information",a,a,a,a,a,a),new A.m0(a),A.eb(A.aH("LIST DOCUMENTS",a,a,a,a,a,a),new A.V7(p),a),A.eb(A.aH("EDIT",a,a,a,a,a,a),new A.V8(p),a),A.eb(A.aH("DELETE",a,a,a,a,a,a),new A.V9(q,p),a)],a1),B.ag,B.a2)],a1)
+for(o=J.al(o.h(p,"fields"));o.u();){j=o.gF(o)
+i=J.ao(j)
+h=A.aH(A.d(i.h(j,a0)),a,a,a,a,a,a)
+g=A.d(i.h(j,"index"))
+f=A.d(i.h(j,"type"))
+e=A.d(i.h(j,"optional"))
+d=A.d(i.h(j,"sort"))
+c=A.d(i.h(j,"facet"))
+b=A.d(i.h(j,"infix"))
+i=i.h(j,"locale")
+k.push(A.ajx(a,a,a,A.aH("index: "+g+", type: "+f+", optional: "+e+", sort: "+d+", facet: "+c+", infix: "+b+", locale: "+A.d(i==null?"":i),a,a,a,a,a,a),h,a))}a2.push(new A.wn(m,l,k,new A.dw(n,r)))}return A.a6w(A.fD(a,A.em(a2,B.bG,B.aq,B.a2),a,a,a,a,a,a,new A.aI(16,16,16,16),a))},
 $S:450}
 A.V6.prototype={
 $0(){return A.nj($.aw(),"/collectionEdit",null,t.z)},
