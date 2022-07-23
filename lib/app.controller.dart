@@ -26,6 +26,8 @@ class App extends GetxController {
   }
 
   loadCollections() async {
+    try {
+      
     final res = await dio.get(
       '${url.text}/collections',
       options: Options(
@@ -37,7 +39,15 @@ class App extends GetxController {
 
     collections = res.data;
     update();
-    // debugPrint(res.toString());
+    } on DioError catch (e) {
+      if ( e.message.contains('XMLHttpRequest error')) {
+      Get.defaultDialog(title: 'Connection Error', content: Text( "Please check the Typesense Server URL and API Key are properly set. Or the server is alive."));
+      } else {
+        rethrow;
+      }
+    } catch (e) {
+      Get.defaultDialog(title: e.toString());
+    }
   }
 
   Future<Map<String, dynamic>> searchDocuments({
