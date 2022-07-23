@@ -17,7 +17,7 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
   String get name => Get.arguments?['name']!;
   List<dynamic> get fields => Get.arguments?['fields'] ?? [];
 
-  static const _pageSize = 10;
+  static const _pageSize = 50;
 
   final PagingController<int, dynamic> _pagingController = PagingController(firstPageKey: 0);
 
