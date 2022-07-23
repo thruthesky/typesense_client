@@ -45,6 +45,7 @@ class CollectionListScreen extends StatelessWidget {
                     title: Text(
                       col['name'],
                     ),
+                    subtitle: Text("No. of documents: ${col["num_documents"]}, Default sorting fields: ${col["default_sorting_field"]}"),
                     children: [
                       Row(
                         children: [
