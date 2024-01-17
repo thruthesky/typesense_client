@@ -37,8 +37,9 @@ class _EntryScreenState extends State<EntryScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  'Typesense Client Interface built with Flutter.',
+                  'Typesense Client Interface built with Flutter.\nUpdated: 2024-01-17',
                   style: Theme.of(context).textTheme.bodySmall,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ],
@@ -73,16 +74,27 @@ class _EntryScreenState extends State<EntryScreen> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    if ( App.of.url.text.startsWith('http') == false ) {
-                      showDialog(context: context, builder: (_) => AlertDialog(title: Text('Typesense Server Url must begin with - "http://" or "https://"'),),);
+                    if (App.of.url.text.startsWith('http') == false) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text(
+                              'Typesense Server Url must begin with - "http://" or "https://"'),
+                        ),
+                      );
                       return;
                     }
-                    
-                    if ( App.of.apiKey.text.isEmpty ) {
-                      showDialog(context: context, builder: (_) => AlertDialog(title: Text('Input API Key'),),);
+
+                    if (App.of.apiKey.text.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Input API Key'),
+                        ),
+                      );
                       return;
                     }
-                    
+
                     App.to.updateConnectionInfomation();
                     Get.toNamed(CollectionListScreen.routeName);
                   },

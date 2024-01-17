@@ -1,25 +1,26 @@
 name: typesense_client
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=3.2.3 <4.0.0"
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  
-  cupertino_icons: ^1.0.2
-  
-  dio: ^4.0.6
-  get: ^4.6.5
+
+  cupertino_icons: ^1.0.6
+
+  dio: ^5.4.0
+  get: ^4.6.6
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  url_launcher: ^6.1.5
-  infinite_scroll_pagination: ^3.2.0
+  url_launcher: ^6.2.3
+  infinite_scroll_pagination: ^4.0.0
 
 dev_dependencies:
   flutter_test:

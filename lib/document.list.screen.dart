@@ -83,8 +83,8 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
               },
               icon: Icon(Icons.create))
         ],
-        bottom: AppBarBottom(
-          height: 100,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(100),
           child: Container(
             color: Colors.white,
             child: Column(
@@ -177,24 +177,5 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
       des = "$des${field['name']}: ${field['type']}, ";
     }
     return des;
-  }
-}
-
-class AppBarBottom extends StatelessWidget with PreferredSizeWidget {
-  AppBarBottom({
-    required this.child,
-    required this.height,
-    Key? key,
-  }) : super(key: key);
-
-  final Widget child;
-  final double height;
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-
-  @override
-  Widget build(BuildContext context) {
-    return child;
   }
 }

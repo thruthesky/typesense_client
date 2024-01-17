@@ -26,26 +26,32 @@ class App extends GetxController {
   }
 
   loadCollections() async {
+    final serverUrl = '${url.text}/collections';
+    print('serverUrl; $serverUrl');
     try {
-      
-    final res = await dio.get(
-      '${url.text}/collections',
-      options: Options(
-        headers: {
-          "X-TYPESENSE-API-KEY": apiKey.text,
-        },
-      ),
-    );
+      final res = await dio.get(
+        serverUrl,
+        options: Options(
+          headers: {
+            "X-TYPESENSE-API-KEY": apiKey.text,
+          },
+        ),
+      );
 
-    collections = res.data;
-    update();
-    } on DioError catch (e) {
-      if ( e.message.contains('XMLHttpRequest error')) {
-      Get.defaultDialog(title: 'Connection Error', content: Text( "Please check the Typesense Server URL and API Key are properly set. Or the server is alive."));
+      debugPrint(res.data.toString());
+      collections = res.data;
+      update();
+    } on DioException catch (e) {
+      if (e.message?.contains('XMLHttpRequest error') == true) {
+        Get.defaultDialog(
+            title: 'Connection Error',
+            content: Text(
+                "Please check the Typesense Server URL and API Key are properly set. Or the server is alive."));
       } else {
         rethrow;
       }
     } catch (e) {
+      debugPrint(e.toString());
       Get.defaultDialog(title: e.toString());
     }
   }

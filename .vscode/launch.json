@@ -13,12 +13,12 @@
       "deviceId": "chrome"
     },
     {
-      "name": "iPhone 13 Pro Max - Simulator",
+      "name": "iPhone 15 Pro Max",
       "request": "launch",
       "type": "dart",
       // Run the web app in the "web" folder via "webdev"
       "program": "lib/main.dart",
-      "deviceId": "ECE40623-ACC2-4729-8DD4-B3DBB46D4B25"
+      "deviceId": "iPhone 15 Pro Max"
     },
     
     {
