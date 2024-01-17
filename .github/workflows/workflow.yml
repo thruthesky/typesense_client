@@ -12,9 +12,8 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-      #      - uses: subosito/flutter-action@v2
-      #        with:
-      #          channel: "dev"
+
+      # 원하는 버전으로 플러터를 설치한다.
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.16.7"
