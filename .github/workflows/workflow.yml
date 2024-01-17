@@ -9,12 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
+      #      - uses: subosito/flutter-action@v2
+      #        with:
+      #          channel: "dev"
       - uses: subosito/flutter-action@v2
         with:
-          channel: "dev"
+          flutter-version: "3.7.7"
+          channel: "stable"
+      - run: flutter --version
       - name: "Run flutter pub get"
         run: flutter pub get
       - name: Enable flutter web
