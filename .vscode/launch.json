@@ -13,6 +13,14 @@
       "deviceId": "chrome"
     },
     {
+      "name": "MacOS",
+      "request": "launch",
+      "type": "dart",
+      // Run the web app in the "web" folder via "webdev"
+      "program": "lib/main.dart",
+      "deviceId": "macos"
+    },
+    {
       "name": "iPhone 15 Pro Max",
       "request": "launch",
       "type": "dart",
